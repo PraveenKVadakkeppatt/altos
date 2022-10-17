@@ -1,0 +1,172 @@
+{% extends 'base2.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/modal.css' %}">
+
+{% block content %}
+
+
+<style>
+  
+  table, th, td{
+    border: 2px solid black ;
+            text-align: center;
+            height: 50%;
+            
+            border-color: #1E4D69;
+            padding: 5px;
+            
+            
+        }
+        th{
+            font-size: 16px;
+            background-color: #1E4D69;
+        }
+        td{
+            font-size: 18px;
+        }
+    .title{
+        margin: auto;
+    }
+    .de{
+        color:  #19B3D3;
+    }
+    .de:hover{
+    color: rgb(0, 255, 21);
+
+
+    
+  }
+
+</style>
+
+    
+</style>
+
+<div class="container-fluid" style="margin-left:2%;width: 90%; ">
+   
+<h1 class="text-center" style="color:  #19B3D3 ;text-align: center;"> Show Messages</h1>
+ <table >
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Message</th>
+        <th>Action</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for p in u %}
+    <tr>
+        
+        <td >{{ p.Name }}</td>
+        <td >{{ p.Email }}</td>
+        <td >{{ p.Phone }}</td>
+        <td >{{ p.massage }}</td>
+        <td> {% if p.status == 0 %}
+            <button style="background-color:yellow;color:#fff;"><a href="{% url 'msg_approve' p.id %}" class="btn btn-success">Approve</a></button>
+        <button style="background-color:yellow"><a href="{% url 'msg_reject' p.id %}" class="btn btn-danger">Reject</a></button>
+        {% elif p.status == 1 %}
+            <button style="background-color:green ; color:#fff;" class="btn btn-warning" disabled="disabled">Approved</button>
+        {% else %}
+            <button style="background-color:red ; color:#fff;" class="btn btn-danger" disabled="disabled">Rejected</button>
+        {% endif %}</td> 
+        <td> 
+            <button style="padding:2px; height:30px;width: 60px;background-color: rgb(62, 219, 62);border-color: rgb(62, 219, 62); "><a  rol="button" class="btn  btn-sm " href="{% url 'delete_user' p.id %}" class="delete"><i style="color:red ;" class="fa-solid fa-trash-can fa-lg"></i></a></button></td>
+
+            <!--<button class="btn btn-primary"><a class=" de" href="#editCourseModal-{{forloop.counter}}" class="edit" data-toggle="modal">Edit</a></button>-->
+    </tr>
+   
+    {% endfor %}
+</tbody>
+ </table>
+ 
+
+    <!---{% for p in u  %}
+        <!-- Edit Modal HTML 
+	<div id="editCourseModal-{{forloop.counter}}" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form method="POST" action="{% url 'edit_user' p.id %}" > {% csrf_token %}
+					<div class="modal-header">						
+						<h4 class="modal-title ">Edit Messages</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<div style="width: 80%;" class="form-outline mb-4 fn">
+                            <input type="text"  class="form-control form-control-lg" name="Name" placeholder="Name" value="{{ p.Name  }} ">
+                            
+                          </div>
+                          <div style="width: 80%;" class="form-outline mb-4 ln" >
+                           
+                            <input type="email"  class="form-control form-control-lg" name="Email" placeholder="Email" value="{{ p.Email  }}" >
+                          </div>
+                
+                          <div style="width: 80%;" class="form-outline mb-4 " >
+                           
+                            <input   class="form-control form-control-lg" name="Phone" placeholder="Phone Number" value="{{ p.Phone }}" >
+                          </div>
+                          <div style="width: 80%;" class="form-outline mb-4 " >
+                           
+                           <textarea  type="text" class="form-control form-control-lg" name="massage" placeholder="Message" value="{{ p.massage }}" ></textarea>
+                         </div>
+            
+                     
+
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+						<input type="submit" class="btn btn-info" value="Save">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+    {% endfor %}
+        
+    {% for p in u  %}
+    <div id="deleteCourseModal-{{forloop.counter}}" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">						
+                        <h4 class="modal-title">Delete Course</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">					
+                        <p>Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><strong>{{ p.Name }} information are Delete</strong></p>
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <input type="button" class="btn btn-primary" data-dismiss="modal" value="Cancel">
+                        <a href="{% url 'delete_user' p.id %}" type="submit" class="btn btn-danger" >Delete</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}=-->
+
+</div>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
+{% endblock content %}
